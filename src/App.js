@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Characters from "./components/Characters";
@@ -19,28 +18,18 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      {" "}
-      <div>
-        <Navbar />
-        <Hero />
-        <Characters />
-        <Games />
-        <BehindTheScenes />
-        <Gallery />
-        <Testimonials />
-        <Join />
-        <Footer />
-        <BackToTop />
-      </div>
-      {/* Define Routes */}
-      <Routes>
-        <Route
-          path="/game/red-light-green-light"
-          element={<RedLightGreenLight />}
-        />{" "}
-      </Routes>
-    </Router>
+    <div>
+      <Navbar />
+      <Hero />
+      <Characters />
+      <Games />
+      <BehindTheScenes />
+      <Gallery />
+      <Testimonials />
+      <Join />
+      <Footer />
+      <BackToTop />
+    </div>
   );
 }
 
