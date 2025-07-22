@@ -3,30 +3,30 @@ import React from "react";
 const Characters = () => {
   const character = [
     {
-      src: "../../assets/character/067.jpg",
+      src: "../../assets/Character/067.jpg",
       name: "Kang Sae-byeok",
       desc: "Player 067 – defector fighting for her family.",
       delay: "100",
     },
     {
-      src: "../../assets/character/AAAAQbpaIYme0rAChfaSmy6jiu8rQ0OdicjHN1bxjgTcLPgezT8VUOwoGkPpN4tJ4BorGnPQcQ8Y8bLuSl99amDvYHbRYRDDvBYMZRdtzvC0RsZV1zcqO6-dvoXtcEPP0ptHU73RfK6c0YgIUjPXsbCISV_r.jpg",
+      src: "../../assets/Character/AAAAQbpaIYme0rAChfaSmy6jiu8rQ0OdicjHN1bxjgTcLPgezT8VUOwoGkPpN4tJ4BorGnPQcQ8Y8bLuSl99amDvYHbRYRDDvBYMZRdtzvC0RsZV1zcqO6-dvoXtcEPP0ptHU73RfK6c0YgIUjPXsbCISV_r.jpg",
       name: "Seong Gi-hun",
       desc: "Player 456 – the protagonist with a good heart.",
     },
     {
-      src: "../../assets/character/squid-game-big-reveal-hints.avif",
+      src: "../../assets/Character/squid-game-big-reveal-hints.avif",
       name: "Oh Il-nam",
       desc: "Player 001 – the oldest, but not what he seems.",
       delay: "200",
     },
     {
-      src: "../../assets/character/squid-game-2-6.jpeg",
+      src: "../../assets/Character/squid-game-2-6.jpeg",
       name: "The Front Man",
       desc: "The mysterious leader of the deadly games, with a hidden agenda.",
       delay: "200",
     },
     {
-      src: "../../assets/character/wi-ha-joon-squid-game.avif",
+      src: "../../assets/Character/wi-ha-joon-squid-game.avif",
       name: "Hwang Jun-ho",
       desc: "Police officer seeking his missing brother in the deadly game.",
       delay: "200",
