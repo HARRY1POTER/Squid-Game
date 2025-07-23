@@ -151,7 +151,7 @@
         /* font-family: "Arial", sans-serif; */
         background: #1c1c1c;
         margin: 0;
-        overflow: hidden;
+        /* overflow: hidden; */
         color: white;
         /* background-image: ""; */
         /* background: url("https://media.sketchfab.com/models/3d6ebede9f044473bcdf65d9bbcf375a/thumbnails/b8c88f824c2a4edaabcc5c886f456dc5/7bfed6be8f054ba18bef6dabb93fd0ac.jpeg")
@@ -252,6 +252,30 @@
         color: #d81878;
         font-weight: bold;
       }
+      #notes {
+        width: 80%;
+        max-width: 700px;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 5px solid #f02d2d;
+        padding: 15px 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        color: #ffffff;
+        backdrop-filter: blur(4px);
+      }
+
+      #notes h3 {
+        margin-top: 0;
+        color: #ff397b;
+      }
+      #notes ul {
+        padding-left: 20px;
+      }
+      #notes li {
+        margin-bottom: 10px;
+        color: black;
+      }
       .squidIcon {
         font-size: 50px;
         margin-top: 20px;
@@ -271,6 +295,21 @@
   </head>
   <body>
     <h1>🎮 Squid Game: Red Light Green Light</h1>
+    <div id="notes">
+      <h3>📝 How to Play:</h3>
+      <ul>
+        <li>
+          🟢 Move forward only when the <strong>GREEN LIGHT</strong> is showing.
+        </li>
+        <li>
+          🔴 Stop immediately when the <strong>RED LIGHT</strong> appears.
+        </li>
+        <li>
+          ❌ If you move during the <strong>RED LIGHT</strong>, the game is
+          over.
+        </li>
+      </ul>
+    </div>
     <div id="light" class="green">GREEN LIGHT</div>
 
     <div id="game">
@@ -305,35 +344,92 @@
         }
       }
 
+      //       document.addEventListener("keydown", (e) => {
+      //         if (gameOver) return;
+
+      //         if (e.code === "Space") {
+      //           if (currentLight === "green") {
+      //             position += step;
+      //             if (position >= finishLine) {
+      //               player.style.left = finishLine + "px";
+      //               message.textContent = "🎉 You Win!";
+      //               gameOver = true;
+      //               retryButton.style.display = "inline-block"; // Show the retry button
+      //             } else {
+      //               player.style.left = position + "px";
+      //             }
+      //             player.textContent = "🏃‍♀️"; // Change to running emoji
+      //             player.style.transform = "rotateY(180deg)"; // Rotate face to the right (flip horizontally)
+      //           } else {
+      //             message.textContent = "❌ You moved on RED! Game Over.";
+      //             gameOver = true;
+      //             retryButton.style.display = "inline-block"; // Show the retry button
+      //             player.textContent = "🧍‍♀️"; // Change to standing emoji if game over
+      //             player.style.transform = "rotateY(0deg)"; // Reset the horizontal rotation (face forward)
+      //           }
+      //         }
+      //       });
+
+      //       document.addEventListener("touchstart", () => {
+      //         if (gameOver) return;
+
+      //         if (currentLight === "green") {
+      //           position += step;
+      //           if (position >= finishLine) {
+      //             player.style.left = finishLine + "px";
+      //             message.textContent = "🎉 You Win!";
+      //             gameOver = true;
+      //             retryButton.style.display = "inline-block";
+      //           } else {
+      //             player.style.left = position + "px";
+      //           }
+      //           player.textContent = "🏃‍♀️";
+      //           player.style.transform = "rotateY(180deg)";
+      //         } else {
+      //           message.textContent = "❌ You moved on RED! Game Over.";
+      //           gameOver = true;
+      //           retryButton.style.display = "inline-block";
+      //           player.textContent = "🧍‍♀️";
+      //           player.style.transform = "rotateY(0deg)";
+      //         }
+      //       });
+
+      //       // Change light every 1 second (1000ms)
+      //       setInterval(switchLight, 1000); // switch light every 1 sec
+
+      //       function restartGame() {
+      //         // Reset game state
+      //         gameOver = false;
+      //         position = 0;
+      //         player.style.left = "0px";
+      //         // message.textContent = "Press SPACE to move";
+      //         updateInstruction();
+
+      //         player.textContent = "🧍‍♀️"; // Set back to standing emoji
+      //         player.style.transform = "rotateY(0deg)"; // Reset horizontal rotation to forward
+      //         retryButton.style.display = "none"; // Hide the retry button
+      //         switchLight(); // Set initial light
+      //       }
+
+      //       function updateInstruction() {
+      //         if (window.innerWidth <= 1024) {
+      //           message.textContent = "📱 Tap anywhere on the screen to move.";
+      //         } else {
+      //           message.textContent = "⌨️ Press the SPACEBAR to move.";
+      //         }
+      //       }
+
       document.addEventListener("keydown", (e) => {
         if (gameOver) return;
-
-        if (e.code === "Space") {
-          if (currentLight === "green") {
-            position += step;
-            if (position >= finishLine) {
-              player.style.left = finishLine + "px";
-              message.textContent = "🎉 You Win!";
-              gameOver = true;
-              retryButton.style.display = "inline-block"; // Show the retry button
-            } else {
-              player.style.left = position + "px";
-            }
-            player.textContent = "🏃‍♀️"; // Change to running emoji
-            player.style.transform = "rotateY(180deg)"; // Rotate face to the right (flip horizontally)
-          } else {
-            message.textContent = "❌ You moved on RED! Game Over.";
-            gameOver = true;
-            retryButton.style.display = "inline-block"; // Show the retry button
-            player.textContent = "🧍‍♀️"; // Change to standing emoji if game over
-            player.style.transform = "rotateY(0deg)"; // Reset the horizontal rotation (face forward)
-          }
-        }
+        if (e.code === "Space") handleMove();
       });
 
       document.addEventListener("touchstart", () => {
         if (gameOver) return;
+        handleMove();
+      });
 
+      function handleMove() {
         if (currentLight === "green") {
           position += step;
           if (position >= finishLine) {
@@ -353,22 +449,31 @@
           player.textContent = "🧍‍♀️";
           player.style.transform = "rotateY(0deg)";
         }
-      });
+      }
 
-      // Change light every 1 second (1000ms)
-      setInterval(switchLight, 1000); // switch light every 1 sec
+      setInterval(switchLight, 1000);
 
       function restartGame() {
-        // Reset game state
         gameOver = false;
         position = 0;
         player.style.left = "0px";
-        message.textContent = "Press SPACE to move";
-        player.textContent = "🧍‍♀️"; // Set back to standing emoji
-        player.style.transform = "rotateY(0deg)"; // Reset horizontal rotation to forward
-        retryButton.style.display = "none"; // Hide the retry button
-        switchLight(); // Set initial light
+        updateInstruction();
+        player.textContent = "🧍‍♀️";
+        player.style.transform = "rotateY(0deg)";
+        retryButton.style.display = "none";
+        switchLight();
       }
+
+      function updateInstruction() {
+        if (window.innerWidth <= 1000) {
+          message.textContent = "📱 Tap anywhere on the screen to move.";
+        } else {
+          message.textContent = "⌨️ Press the SPACEBAR to move.";
+        }
+      }
+
+      window.addEventListener("resize", updateInstruction);
+      updateInstruction(); // Call once on load
     </script>
   </body>
 </html>
