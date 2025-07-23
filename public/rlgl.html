@@ -331,6 +331,30 @@
         }
       });
 
+      document.addEventListener("touchstart", () => {
+        if (gameOver) return;
+
+        if (currentLight === "green") {
+          position += step;
+          if (position >= finishLine) {
+            player.style.left = finishLine + "px";
+            message.textContent = "🎉 You Win!";
+            gameOver = true;
+            retryButton.style.display = "inline-block";
+          } else {
+            player.style.left = position + "px";
+          }
+          player.textContent = "🏃‍♀️";
+          player.style.transform = "rotateY(180deg)";
+        } else {
+          message.textContent = "❌ You moved on RED! Game Over.";
+          gameOver = true;
+          retryButton.style.display = "inline-block";
+          player.textContent = "🧍‍♀️";
+          player.style.transform = "rotateY(0deg)";
+        }
+      });
+
       // Change light every 1 second (1000ms)
       setInterval(switchLight, 1000); // switch light every 1 sec
 

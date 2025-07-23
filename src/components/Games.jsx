@@ -62,19 +62,19 @@ const Games = () => {
             data-aos="flip-up"
             data-aos-delay={game.delay}
           >
-            <div className="content-area mb-6">
+            <div className="mb-6">
               <h3 className="text-3xl font-extrabold text-gradient-to-r from-pink-500 to-teal-400 mb-4">
                 {game.title}
               </h3>
               <p className="text-gray-200">{game.desc}</p>
             </div>
 
-            <div className="play-button-container mt-6">
+            {/* <div className="mt- 6"> */}
               <button
                 key={game.gameName}
                 onClick={() => handlePlayGame(game.gameName)}
                 className={`relative w-full px-8 py-3 bg-gradient-to-r from-green-400 via-pink-500 to-black text-black font-semibold rounded-full overflow-hidden group hover:text-black 
-                ${index === 1 || index === 3 ? "top-9" : ""}`}
+                ${index === 1 || index === 3 ? "md:top-9 " : ""}`}
               >
                 <span className="absolute left-0 top-0 w-0 h-full bg-green-400 transition-all duration-300 group-hover:w-full group-hover:left-auto group-hover:right-0 group-hover:bg-pink-400"></span>
 
@@ -86,7 +86,7 @@ const Games = () => {
                   ➡️
                 </span>
               </button>
-            </div>
+            {/* </div> */}
           </div>
         ))}
       </div>
