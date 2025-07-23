@@ -25,13 +25,13 @@ const Testimonials = () => {
       // data-aos="fade-right"
     >
       <h2 className="text-4xl text-pink-600 mb-10">🗣️ What Players Say</h2>
-      <div className="space-y-6">
+      <div className="space-y-6 mx-5">
         {testimonials.map((quote, idx) => (
           <blockquote
             key={idx}
-            className="bg-[#222] text-gray-300 italic border-l-4 border-pink-600 mx-5 px-6 py-4 max-w-3xl transition-transform duration-300 hover:scale-[1.02] lg:mx-auto"
-            data-aos={idx % 2 === 0 ? "fade-right" : "fade-up"}
-            data-aos-delay={idx * 100}
+            className="bg-[#222] text-gray-300 italic border-l-4 border-pink-600 px-6 py-4 max-w-3xl transition-transform duration-300 hover:scale-[1.02] mx-auto"
+            // data-aos={idx % 2 === 0 ? "fade-right" : "fade-up"}
+            // data-aos-delay={idx * 100}
           >
             {quote.text}
           </blockquote>
