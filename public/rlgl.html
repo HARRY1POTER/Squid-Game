@@ -82,7 +82,7 @@
       <div id="finishLine"></div>
     </div>
 
-    <div id="message">Press SPACE to move</div>
+    <div id="message">Press ENTER to move</div>
     <button id="retryButton" onclick="restartGame()">Retry</button>
 
     <script>
@@ -107,7 +107,7 @@
       document.addEventListener("keydown", (e) => {
         if (gameOver) return;
 
-        if (e.code === "Space") {
+        if (e.code === "Enter") {
           if (currentLight === "green") {
             position += step;
             if (position >= finishLine) {
@@ -134,7 +134,7 @@
         gameOver = false;
         position = 0;
         player.style.left = "0px";
-        message.textContent = "Press SPACE to move";
+        message.textContent = "Press ENTER to move";
         retryButton.style.display = "none"; // Hide the retry button
         switchLight(); // Set initial light
       }
@@ -317,7 +317,7 @@
       <div id="finishLine"></div>
     </div>
 
-    <div id="message">Press SPACE to move</div>
+    <div id="message">Press ENTER to move</div>
     <button id="retryButton" onclick="restartGame()">Retry</button>
 
     <script>
@@ -347,7 +347,7 @@
       //       document.addEventListener("keydown", (e) => {
       //         if (gameOver) return;
 
-      //         if (e.code === "Space") {
+      //         if (e.code === "Enter") {
       //           if (currentLight === "green") {
       //             position += step;
       //             if (position >= finishLine) {
@@ -402,7 +402,7 @@
       //         gameOver = false;
       //         position = 0;
       //         player.style.left = "0px";
-      //         // message.textContent = "Press SPACE to move";
+      //         // message.textContent = "Press ENTER to move";
       //         updateInstruction();
 
       //         player.textContent = "🧍‍♀️"; // Set back to standing emoji
@@ -415,13 +415,13 @@
       //         if (window.innerWidth <= 1024) {
       //           message.textContent = "📱 Tap anywhere on the screen to move.";
       //         } else {
-      //           message.textContent = "⌨️ Press the SPACEBAR to move.";
+      //           message.textContent = "⌨️ Press the ENTERBAR to move.";
       //         }
       //       }
 
       document.addEventListener("keydown", (e) => {
         if (gameOver) return;
-        if (e.code === "Space") handleMove();
+        if (e.code === "Enter") handleMove();
       });
 
       document.addEventListener("touchstart", () => {
@@ -468,7 +468,7 @@
         if (window.innerWidth <= 1000) {
           message.textContent = "📱 Tap anywhere on the screen to move.";
         } else {
-          message.textContent = "⌨️ Press the SPACEBAR to move.";
+          message.textContent = "⌨️ Press the Enter to move.";
         }
       }
 
