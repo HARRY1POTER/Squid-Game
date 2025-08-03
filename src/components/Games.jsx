@@ -70,22 +70,22 @@ const Games = () => {
             </div>
 
             {/* <div className="mt- 6"> */}
-              <button
-                key={game.gameName}
-                onClick={() => handlePlayGame(game.gameName)}
-                className={`relative w-full px-8 py-3 bg-gradient-to-r from-green-400 via-pink-500 to-black text-black font-semibold rounded-full overflow-hidden group hover:text-black 
+            <button
+              key={game.gameName}
+              onClick={() => handlePlayGame(game.gameName)}
+              className={`relative w-full px-8 py-3 bg-gradient-to-r from-green-400 via-pink-500 to-black text-black font-semibold rounded-full overflow-hidden group hover:text-black 
                 ${index === 1 || index === 3 ? "md:top-9 " : ""}`}
-              >
-                <span className="absolute left-0 top-0 w-0 h-full bg-green-400 transition-all duration-300 group-hover:w-full group-hover:left-auto group-hover:right-0 group-hover:bg-pink-400"></span>
+            >
+              <span className="absolute left-0 top-0 w-0 h-full bg-green-400 transition-all duration-300 group-hover:w-full group-hover:left-auto group-hover:right-0 group-hover:bg-pink-400"></span>
 
-                <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-300">
-                  Play {game.title}
-                </span>
+              <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-300">
+                Play {game.title}
+              </span>
 
-                <span className="absolute right-6 top-1/2 transform -translate-y-1/2 text-2xl group-hover:translate-x-2 transition-all duration-300 opacity-5 group-hover:opacity-100">
-                  ➡️
-                </span>
-              </button>
+              <span className="absolute right-6 top-1/2 transform -translate-y-1/2 text-2xl group-hover:translate-x-2 transition-all duration-300 opacity-5 group-hover:opacity-100">
+                ➡️
+              </span>
+            </button>
             {/* </div> */}
           </div>
         ))}
