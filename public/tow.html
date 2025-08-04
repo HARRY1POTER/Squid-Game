@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tug of War: Human vs Computer</title>
+    <style>
+      /* Global styles */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #141414; /* Dark background for Squid Game feel */
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #ff4c4c;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px #ff4c4c;
+      }
+
+      /* Game container */
+      #game {
+        width: 100%;
+        max-width: 800px;
+        padding: 20px;
+        background-color: #1c1c1c;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Rope display */
+      #rope {
+        font-size: 20px;
+        margin: 30px 0;
+        font-family: monospace;
+        white-space: pre;
+        color: #d3d3d3;
+        transition: transform 0.1s ease-in-out; /* For shaking effect */
+      }
+
+      /* Result message */
+      #result {
+        font-size: 24px;
+        color: #ff4c4c;
+        margin-top: 20px;
+      }
+
+      /* Button styles */
+      button {
+        font-size: 18px;
+        padding: 12px 25px;
+        background-color: #ff4c4c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #e63e3e;
+        transform: scale(1.1);
+      }
+
+      button:active {
+        transform: scale(0.9);
+      }
+
+      #retryButton {
+        display: none; /* Hidden initially */
+        margin-top: 20px;
+      }
+
+      /* Responsive design */
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        #game {
+          width: 90%;
+        }
+
+        #rope {
+          font-size: 18px;
+        }
+
+        button {
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🤼 Tug of War: Human vs Computer</h1>
+    <div id=" game">
+      <div id="rope"></div>
+      <button id="pullButton">Pull!</button>
+      <button id="retryButton">Play Again</button>
+      <div id="result"></div>
+    </div>
+
+    <!-- Sound effects -->
+    <audio id="humanPullSound" src="human_pull.mp3" preload="auto"></audio>
+    <audio
+      id="computerPullSound"
+      src="computer_pull.mp3"
+      preload="auto"
+    ></audio>
+    <audio id="winSound" src="win_sound.mp3" preload="auto"></audio>
+    <audio id="loseSound" src="lose_sound.mp3" preload="auto"></audio>
+
+    <!-- Background music -->
+    <audio
+      id="backgroundMusic"
+      loop="true"
+      src="background_music.mp3"
+      autoplay
+    ></audio>
+
+    <script>
+      const ropeElement = document.getElementById("rope");
+      const resultElement = document.getElementById("result");
+      const pullButton = document.getElementById("pullButton");
+      const retryButton = document.getElementById("retryButton");
+
+      const humanPullSound = document.getElementById("humanPullSound");
+      const computerPullSound = document.getElementById("computerPullSound");
+      const winSound = document.getElementById("winSound");
+      const loseSound = document.getElementById("loseSound");
+
+      let ropeLength = 81; // longer rope
+      let ropePosition = Math.floor(ropeLength / 2); // start in the center
+      let gameOver = false;
+
+      function renderRope() {
+        let rope = "";
+        for (let i = 0; i < ropeLength; i++) {
+          rope += i === ropePosition ? "|" : "-";
+        }
+        ropeElement.textContent =
+          rope +
+          "\n" +
+          "👤 Human" +
+          " ".repeat(ropeLength - 20) +
+          "Computer 🤖";
+      }
+
+      function shakeRope() {
+        ropeElement.style.transform = "rotate(5deg)";
+        setTimeout(() => {
+          ropeElement.style.transform = "rotate(-5deg)";
+        }, 50);
+        setTimeout(() => {
+          ropeElement.style.transform = "rotate(5deg)";
+        }, 100);
+        setTimeout(() => {
+          ropeElement.style.transform = "rotate(0deg)";
+        }, 150);
+      }
+
+      function checkWin() {
+        if (ropePosition <= 0) {
+          resultElement.textContent = "🎉 You win!";
+          winSound.play();
+          gameOver = true;
+        } else if (ropePosition >= ropeLength - 1) {
+          resultElement.textContent = "💻 Computer wins!";
+          loseSound.play();
+          gameOver = true;
+        }
+        if (gameOver) {
+          pullButton.disabled = true;
+          retryButton.style.display = "inline"; // Show play again button
+        }
+      }
+
+      function humanPull() {
+        if (gameOver) return;
+        ropePosition = Math.max(0, ropePosition - 1);
+        renderRope();
+        shakeRope(); // Rope shake animation on human pull
+        humanPullSound.play();
+        checkWin();
+      }
+
+      function computerPull() {
+        if (gameOver) return;
+        ropePosition = Math.min(ropeLength - 1, ropePosition + 1);
+        renderRope();
+        shakeRope(); // Rope shake animation on computer pull
+        computerPullSound.play();
+        checkWin();
+      }
+
+      function startComputer() {
+        if (gameOver) return;
+        const delay = Math.random() * 300 + 300; // 300–600ms
+        setTimeout(() => {
+          computerPull();
+          startComputer();
+        }, delay);
+      }
+
+      function resetGame() {
+        // Reset game variables
+        ropePosition = Math.floor(ropeLength / 2);
+        gameOver = false;
+        resultElement.textContent = "";
+        pullButton.disabled = false;
+        retryButton.style.display = "none"; // Hide play again button
+
+        // Restart the game
+        renderRope();
+        startComputer();
+      }
+
+      pullButton.addEventListener("click", humanPull);
+      retryButton.addEventListener("click", resetGame);
+
+      // Start game
+      renderRope();
+      startComputer();
+    </script>
+  </body>
+</html>

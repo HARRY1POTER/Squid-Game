@@ -12,7 +12,7 @@ const Games = () => {
       title: "⚖️ Tug of War",
       desc: "Teamwork, strength, and faith determine who lives.",
       delay: 100,
-      gameName: "tug-of-war.html",
+      gameName: "tow.html",
     },
     {
       title: "🪟 Glass Bridge",
