@@ -20,6 +20,8 @@
         height: 100vh;
         box-sizing: border-box;
         overflow: hidden;
+        background: url("./assets/Games/Jump_Rope.webp") no-repeat;
+        background-size: cover;
       }
 
       h1 {
@@ -85,6 +87,7 @@
       #retryButton {
         display: none; /* Hidden initially */
         margin-top: 20px;
+        margin-left: 10px;
       }
 
       /* Responsive design */
@@ -94,13 +97,12 @@
         }
 
         #game {
-          width: 90%;
+          width: 1000%;
         }
 
         #rope {
           font-size: 18px;
         }
-
         button {
           font-size: 16px;
           padding: 10px 20px;
@@ -110,7 +112,7 @@
   </head>
   <body>
     <h1>🤼 Tug of War: Human vs Computer</h1>
-    <div id=" game">
+    <div id="g ame">
       <div id="rope"></div>
       <button id="pullButton">Pull!</button>
       <button id="retryButton">Play Again</button>
@@ -146,10 +148,22 @@
       const winSound = document.getElementById("winSound");
       const loseSound = document.getElementById("loseSound");
 
-      let ropeLength = 81; // longer rope
-      let ropePosition = Math.floor(ropeLength / 2); // start in the center
+      // let ropeLength = 80; // longer rope
+      // let ropePosition = Math.floor(ropeLength / 2); // start in the center
       let gameOver = false;
 
+      function getRopeLength() {
+        const width = window.innerWidth;
+        if (width <= 500) return 30; // Mobile
+        if (width <= 900) return 60; // Tablet / small laptop
+        if (width <= 1043) return 80; // Tablet / small laptop
+        if (width <= 1728) return 90; // Tablet / small laptop
+        if (width <= 2570) return 150;
+        return 80; // Desktop / large screens
+      }
+
+      let ropeLength = getRopeLength(); // Set dynamically
+      let ropePosition = Math.floor(ropeLength / 2);
       function renderRope() {
         let rope = "";
         for (let i = 0; i < ropeLength; i++) {
@@ -235,9 +249,17 @@
       pullButton.addEventListener("click", humanPull);
       retryButton.addEventListener("click", resetGame);
 
+      //  document.addEventListener("keydown", (event) => {
+      //   if (event.key === " " && !gameOver) {
+      //     humanPull();
+      //   }
+      // });
+
       // Start game
       renderRope();
       startComputer();
     </script>
   </body>
 </html>
+
+<!--  -->
