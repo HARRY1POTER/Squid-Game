@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Squid Game: Glass Bridge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&family=Black+Han+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Orbitron", sans-serif;
+        background: linear-gradient(to bottom, #000000, #1a1a1a);
+        color: #f1f1f1;
+        text-align: center;
+        margin: 0;
+        padding: 1rem;
+        background: url("./assets//Games/SquidGame_NetflixGlassBridge2.webp")
+          no-repeat;
+        background-size: cover;
+      }
+
+      h1 {
+        font-family: "Black Han Sans", sans-serif;
+        font-size: 2.5rem;
+        margin: 1rem 0;
+        color: #e60073;
+        letter-spacing: 2px;
+      }
+
+      #bridge {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-top: 2rem;
+      }
+
+      .row {
+        display: flex;
+        justify-content: center;
+        margin: 0.3rem 0;
+      }
+
+      .tile {
+        width: 22vw;
+        max-width: 120px;
+        height: 12vw;
+        max-height: 60px;
+        margin: 0 1vw;
+        background-color: #333;
+        border: 3px solid #999;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        box-shadow: 0 0 10px #111;
+        border-radius: 6px;
+      }
+
+      .tile:hover {
+        box-shadow: 0 0 20px #f1c40f;
+      }
+
+      .tile.safe {
+        background-color: #0f0;
+        box-shadow: 0 0 20px #0f0;
+      }
+
+      .tile.break {
+        background-color: #f00;
+        box-shadow: 0 0 20px #f00;
+      }
+
+      .tile.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      #status {
+        margin-top: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #00ffcc;
+        text-shadow: 0 0 5px #00ffcc;
+      }
+
+      #restartBtn {
+        margin-top: 2rem;
+        padding: 0.8rem 1.8rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        background-color: #e60073;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 0 10px #e60073;
+        display: none;
+        transition: background-color 0.3s;
+      }
+
+      #restartBtn:hover {
+        background-color: #ff1a8c;
+      }
+
+      .flash {
+        animation: flashText 1s infinite alternate;
+      }
+
+      @keyframes flashText {
+        0% {
+          color: #ff1a8c;
+          text-shadow: 0 0 5px #ff1a8c;
+        }
+        100% {
+          color: #fff;
+          text-shadow: 0 0 20px #ff1a8c;
+        }
+      }
+
+      /* Responsive Tweaks */
+      @media (max-width: 600px) {
+        .tile {
+          width: 40vw;
+          height: 16vw;
+          margin: 0 2vw;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        #status {
+          font-size: 1rem;
+        }
+
+        #restartBtn {
+          font-size: 1rem;
+          padding: 0.6rem 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🦑 Squid Game: Glass Bridge</h1>
+    <div id="bridge"></div>
+    <div id="status">Choose wisely... 👣</div>
+    <button id="restartBtn" onclick="restartGame()">Restart</button>
+
+    <script>
+      const bridge = document.getElementById("bridge");
+      const status = document.getElementById("status");
+      const restartBtn = document.getElementById("restartBtn");
+
+      let totalRows = 6;
+      let safePath = [];
+      let currentStep = 0;
+      let gameOver = false;
+
+      function generateBridge() {
+        bridge.innerHTML = "";
+        safePath = [];
+
+        for (let i = 0; i < totalRows; i++) {
+          const row = document.createElement("div");
+          row.classList.add("row");
+
+          const safeIndex = Math.floor(Math.random() * 2);
+          safePath.push(safeIndex);
+
+          for (let j = 0; j < 2; j++) {
+            const tile = document.createElement("div");
+            tile.classList.add("tile");
+            tile.dataset.row = i;
+            tile.dataset.index = j;
+            tile.addEventListener("click", handleTileClick);
+            row.appendChild(tile);
+          }
+
+          bridge.appendChild(row);
+        }
+      }
+
+      function handleTileClick(e) {
+        if (gameOver) return;
+
+        const tile = e.target;
+        const row = parseInt(tile.dataset.row);
+        const index = parseInt(tile.dataset.index);
+
+        if (row !== currentStep) return;
+
+        const isSafe = safePath[row] === index;
+
+        if (isSafe) {
+          tile.classList.add("safe");
+          currentStep++;
+
+          if (currentStep === totalRows) {
+            status.textContent = "🎉 You survived the bridge!";
+            status.classList.add("flash");
+            gameOver = true;
+            restartBtn.style.display = "inline-block";
+          } else {
+            status.textContent = "✅ Good choice. Keep going...";
+          }
+        } else {
+          tile.classList.add("break");
+          status.textContent = "💀 Wrong tile. You fell!";
+          status.classList.add("flash");
+          gameOver = true;
+          disableAllTiles();
+          restartBtn.style.display = "inline-block";
+        }
+
+        tile.classList.add("disabled");
+      }
+
+      function disableAllTiles() {
+        const tiles = document.querySelectorAll(".tile");
+        tiles.forEach((tile) => tile.classList.add("disabled"));
+      }
+
+      function restartGame() {
+        currentStep = 0;
+        gameOver = false;
+        status.textContent = "Choose wisely... 👣";
+        status.classList.remove("flash");
+        restartBtn.style.display = "none";
+        generateBridge();
+      }
+
+      // Start the game
+      restartGame();
+    </script>
+  </body>
+</html>

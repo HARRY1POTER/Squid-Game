@@ -41,7 +41,7 @@ const Characters = () => {
       <div className="flex flex-wrap justify-center gap-8">
         {character.map((char, idx) => (
           <div
-            className="bg-[#1c1c1c] border-2 border-pink-600 rounded-xl w-64 transition-transform duration-300 hover:-translate-y-1 hover:shadow-pink-600 hover:shadow-lg overflow-hidden"
+            className="bg-[#1c1c1c] border-2 border-pink-600 rounded-xl w-64 transition-transform duration-300 hover:-translate-y-1 hover:shadow-pink-600 hover:shadow-lg overflow-hidden hover:scale-105"
             key={idx}
             data-aos="zoom-in"
             data-aos-delay={char.delay}
