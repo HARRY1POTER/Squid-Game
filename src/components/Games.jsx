@@ -18,7 +18,7 @@ const Games = () => {
       title: "🪟 Glass Bridge",
       desc: "Only one path leads to survival.",
       delay: 200,
-      gameName: "glass-bridge.html",
+      gameName: "gb.html",
     },
     {
       title: "🎲 Marbles",
