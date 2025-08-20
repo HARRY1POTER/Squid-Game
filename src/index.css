@@ -30,5 +30,5 @@ body {
 ::-webkit-scrollbar {
   width: 4px;
   background-color: black;
-  /* display: none; */
+  /* display: none;  */
 }
