@@ -1,5 +1,5 @@
 import React from "react";
- 
+
 const testimonials = [
   { text: `"Squid Game changed my life. I’ll never forget it." – Player 456` },
   { text: `"A fight for survival… with friends and enemies." – Player 067` },

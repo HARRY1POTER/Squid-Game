@@ -33,7 +33,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu */} 
       <div
         className={`md:hidden px-6 pb-4 transition-all duration-300 ease-in-out ${
           isOpen ? "block" : "hidden"
