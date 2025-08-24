@@ -18,7 +18,7 @@ const Navbar = () => {
           {isOpen ? "✖" : "☰"}
         </button>
 
-        {/* Navigation Links  (Desktop) */}
+        {/* Navigation Links (Desktop) */}
         <ul className="hidden md:flex gap-6 text-sm">
           {navItems.map((item, index) => (
             <li key={item}>
