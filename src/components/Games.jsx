@@ -69,7 +69,7 @@ const Games = () => {
               <p className="text-gray-200">{game.desc}</p>
             </div>
 
-            {/* <div className="mt- 6"> */}
+            {/* <div className="mt-6"> */}
             <button
               key={game.gameName}
               onClick={() => handlePlayGame(game.gameName)}
