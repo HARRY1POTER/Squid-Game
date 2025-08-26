@@ -144,6 +144,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>Red Light Green Light</title>
     <style>
       body {
@@ -158,6 +162,13 @@
         background: url("./assets/Games/squid-game-infamous-robot-doll-pmpbdqptsur1e3lw.webp")
           no-repeat;
         background-size: cover;
+        /* Prevent double tap zoom on iOS */
+
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
       }
       h1 {
         margin-top: 40px;
@@ -473,6 +484,17 @@
 
       window.addEventListener("resize", updateInstruction);
       updateInstruction(); // Call once on load
+
+      let lastTouch = 0;
+
+      document.addEventListener("touchstart", (e) => {
+        const now = Date.now();
+        if (now - lastTouch < 300) return; // ignore if tapped again too quickly
+        lastTouch = now;
+
+        if (gameOver) return;
+        handleMove();
+      });
     </script>
   </body>
 </html>
