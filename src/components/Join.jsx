@@ -17,6 +17,7 @@ const Join = () => {
           type="text"
           placeholder="Enter your phone number..."
           className="px-4 py-2 w-64 rounded-md text-black"
+          required
         />
         <button
           type="submit"
