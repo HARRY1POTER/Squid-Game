@@ -1,0 +1,392 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Squid Game - Marbles</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+      .game-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: auto;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      #result {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h2>Marbles Game</h2>
+      <p>Player's Marbles: <span id="playerMarbles">10</span></p>
+      <p>Computer's Marbles: <span id="computerMarbles">10</span></p>
+
+      <p>Choose "Odd" or "Even" to start your turn:</p>
+      <button id="oddBtn">Odd</button>
+      <button id="evenBtn">Even</button>
+
+      <h3 id="result"></h3>
+      <button id="resetBtn" style="display: none">Reset Game</button>
+    </div>
+
+    <script>
+      let playerMarbles = 10;
+      let computerMarbles = 10;
+
+      const playerMarblesSpan = document.getElementById("playerMarbles");
+      const computerMarblesSpan = document.getElementById("computerMarbles");
+      const resultElement = document.getElementById("result");
+      const resetBtn = document.getElementById("resetBtn");
+
+      const oddBtn = document.getElementById("oddBtn");
+      const evenBtn = document.getElementById("evenBtn");
+
+      function playTurn(playerGuess) {
+        if (playerMarbles <= 0 || computerMarbles <= 0) {
+          resultElement.textContent = "Game Over!";
+          oddBtn.disabled = true;
+          evenBtn.disabled = true;
+          resetBtn.style.display = "inline-block";
+          return;
+        }
+
+        // Computer randomly chooses a number between 1 and 5
+        const computerChoice = Math.floor(Math.random() * 5) + 1;
+        const total = computerChoice;
+
+        // Determine if the total is odd or even
+        const isEven = total % 2 === 0;
+
+        if (
+          (playerGuess === "odd" && !isEven) ||
+          (playerGuess === "even" && isEven)
+        ) {
+          resultElement.textContent = `You guessed correctly! Computer had ${computerChoice} marbles.`;
+          playerMarbles += computerChoice; // Player wins marbles
+          computerMarbles -= computerChoice; // Computer loses marbles
+        } else {
+          resultElement.textContent = `You guessed wrong! Computer had ${computerChoice} marbles.`;
+          playerMarbles -= computerChoice; // Player loses marbles
+          computerMarbles += computerChoice; // Computer wins marbles
+        }
+
+        // Update the UI
+        playerMarblesSpan.textContent = playerMarbles;
+        computerMarblesSpan.textContent = computerMarbles;
+
+        // Check if anyone is out of marbles
+        if (playerMarbles <= 0 || computerMarbles <= 0) {
+          resultElement.textContent += " Game Over!";
+          oddBtn.disabled = true;
+          evenBtn.disabled = true;
+          resetBtn.style.display = "inline-block";
+        }
+      }
+
+      oddBtn.addEventListener("click", () => playTurn("odd"));
+      evenBtn.addEventListener("click", () => playTurn("even"));
+
+      resetBtn.addEventListener("click", () => {
+        playerMarbles = 10;
+        computerMarbles = 10;
+        playerMarblesSpan.textContent = playerMarbles;
+        computerMarblesSpan.textContent = computerMarbles;
+        resultElement.textContent = "";
+        oddBtn.disabled = false;
+        evenBtn.disabled = false;
+        resetBtn.style.display = "none";
+      });
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Squid Game - Marbles</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 51, 51, 0.8),
+          rgba(255, 51, 51, 0.5)
+        );
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-size: cover;
+        overflow: hidden;
+        background-image: url("./assets/Games/squid-game-marble-playground.jpg");
+      }
+
+      .game-container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        max-width: 450px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        margin: 0px 6px;
+      }
+
+      h2 {
+        font-size: 32px;
+        color: #ff4444;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        margin: 5px;
+      }
+
+      .masked {
+        font-size: 20px;
+        font-weight: 500;
+        color: #ddd;
+      }
+
+      .marble-count {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 5px 0;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 15px 25px;
+        margin: 15px;
+        background-color: #f44336;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #ff5722;
+        transform: scale(1.05);
+      }
+
+      #result {
+        font-size: 22px;
+        font-weight: 700;
+        margin-top: 20px;
+        color: #fff;
+      }
+
+      .game-over {
+        font-size: 28px;
+        color: #ff4444;
+      }
+
+      .reset-btn {
+        background-color: #4caf50;
+        display: none;
+        width: 100%;
+      }
+
+      .reset-btn:hover {
+        background-color: #45a049;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: #ddd;
+      }
+
+      @media screen and (min-width: 768px) {
+        .game-container {
+          max-width: 500px;
+        }
+        button {
+          width: auto;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        button {
+          width: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h2>Squid Game: Marbles</h2>
+      <p class="masked">
+        Player's Marbles:
+        <span id="playerMarbles" class="marble-count">10</span>
+      </p>
+      <p class="masked">
+        Computer's Marbles:
+        <span id="computerMarbles" class="marble-count">10</span>
+      </p>
+
+      <!-- <p class="masked">Choose Odd or Even:</p> -->
+      <p class="masked" style="margin-top: 15px; font-size: 30px">
+        Choose Odd or Even :
+      </p>
+      <button id="oddBtn">Odd</button>
+      <button id="evenBtn">Even</button>
+
+      <h3 id="result"></h3>
+      <button id="resetBtn" class="reset-btn">Reset Game</button>
+    </div>
+
+    <!-- <div class="game-container">
+      <h2>Squid Game: Marbles</h2>
+      <p class="masked">
+        Player's Marbles:
+        <span id="playerMarbles" class="marble-count">10</span>
+      </p>
+      <p class="masked">
+        Computer's Marbles:
+        <span id="computerMarbles" class="marble-count">10</span>
+      </p>
+
+      <p class="masked">Choose Odd or Even:</p>
+      <button id="oddBtn">Odd</button>
+      <button id="evenBtn">Even</button>
+
+      <h3 id="result"></h3>
+      <button id="resetBtn" class="reset-btn">Reset Game</button> -->
+
+    <!-- How to Play Section -->
+    <!-- <button id="howToPlayBtn" class="how-to-play-btn">How to Play</button>
+      <div id="howToPlay" class="how-to-play">
+        <h3>How to Play</h3>
+        <p>
+          In this game, you will face off against the computer in a game of
+          marbles. Here's how to play:
+        </p>
+        <ul>
+          <li>
+            You will be given a set number of marbles (10). So does the
+            computer.
+          </li>
+          <li>
+            Each round, you need to choose whether you think the number of
+            marbles the computer has chosen will be Odd or Even.
+          </li>
+          <li>
+            If you guess correctly, you win the marbles the computer has chosen.
+            If you guess incorrectly, you lose the marbles!
+          </li>
+          <li>
+            The game ends when either you or the computer runs out of marbles.
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+    <script>
+      let playerMarbles = 10;
+      let computerMarbles = 10;
+
+      const playerMarblesSpan = document.getElementById("playerMarbles");
+      const computerMarblesSpan = document.getElementById("computerMarbles");
+      const resultElement = document.getElementById("result");
+      const resetBtn = document.getElementById("resetBtn");
+
+      const oddBtn = document.getElementById("oddBtn");
+      const evenBtn = document.getElementById("evenBtn");
+
+      function playTurn(playerGuess) {
+        if (playerMarbles <= 0 || computerMarbles <= 0) {
+          resultElement.textContent = "Game Over!";
+          resultElement.classList.add("game-over");
+          oddBtn.disabled = true;
+          evenBtn.disabled = true;
+          resetBtn.style.display = "block";
+          return;
+        }
+
+        // Computer randomly chooses a number between 1 and 5
+        const computerChoice = Math.floor(Math.random() * 5) + 1;
+        const total = computerChoice;
+
+        // Determine if the total is odd or even
+        const isEven = total % 2 === 0;
+
+        // Check if the player's guess is correct
+        if (
+          (playerGuess === "odd" && !isEven) ||
+          (playerGuess === "even" && isEven)
+        ) {
+          // Player guessed correctly
+          resultElement.textContent = `You guessed correctly! Computer had ${computerChoice} marbles.`;
+          playerMarbles += computerChoice; // Player wins marbles
+          computerMarbles -= computerChoice; // Computer loses marbles
+        } else {
+          // Player guessed incorrectly
+          resultElement.textContent = `You guessed wrong! Computer had ${computerChoice} marbles.`;
+          playerMarbles -= computerChoice; // Player loses marbles
+          computerMarbles += computerChoice; // Computer wins marbles
+        }
+
+        // Update the UI
+        playerMarblesSpan.textContent = playerMarbles;
+        computerMarblesSpan.textContent = computerMarbles;
+
+        // Check if anyone is out of marbles
+        if (playerMarbles <= 0 || computerMarbles <= 0) {
+          resultElement.textContent += " Game Over!";
+          resultElement.classList.add("game-over");
+          oddBtn.disabled = true;
+          evenBtn.disabled = true;
+          resetBtn.style.display = "block";
+        }
+      }
+
+      oddBtn.addEventListener("click", () => playTurn("odd"));
+      evenBtn.addEventListener("click", () => playTurn("even"));
+
+      resetBtn.addEventListener("click", () => {
+        playerMarbles = 10;
+        computerMarbles = 10;
+        playerMarblesSpan.textContent = playerMarbles;
+        computerMarblesSpan.textContent = computerMarbles;
+        resultElement.textContent = "";
+        resultElement.classList.remove("game-over");
+        oddBtn.disabled = false;
+        evenBtn.disabled = false;
+        resetBtn.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
