@@ -44,7 +44,7 @@ const Characters = () => {
             className="bg-[#1c1c1c] border-2 border-pink-600 rounded-xl w-64 transition-transform duration-300 hover:-translate-y-1 hover:shadow-pink-600 hover:shadow-lg overflow-hidden hover:scale-105"
             key={idx}
             data-aos="zoom-in"
-            data-aos-delay={char.delay} 
+            data-aos-delay={char.delay}
           >
             <img
               src={char.src}
